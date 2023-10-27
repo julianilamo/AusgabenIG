@@ -12,12 +12,12 @@ const Public = () => {
                     <h1>Um Ausgaben zu erfassen, melden Sie sich an</h1>
                     <p>Wo es nicht an Windeln mangelt und es viel Gelächter gibt</p>
 
-                    <h2><NavLink to="/login">Employee Login</NavLink></h2>
+                    <h2><NavLink to="/login" className="Link__class">Employee Login</NavLink></h2>
 
                     <div className="public__main_bottom">
                         <address className="public__addr">
                             Employee of the year: Alejandro<br />
-                            <a href="https://www.youtube.com/watch?v=ZhXL9YNVA_4">Don't click here</a>
+                            <a href="https://www.youtube.com/watch?v=ZhXL9YNVA_4" className="Link__class">Don't click here</a>
                         </address>
                         <br />
                         <p>Owner: The familie</p>
