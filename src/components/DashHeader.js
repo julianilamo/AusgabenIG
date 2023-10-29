@@ -138,12 +138,11 @@ const DashHeader = () => {
                     <Link to="/dash">
                         <h1 className="dash-header__title">AUSGABEN</h1>
                     </Link>
-                </div>
-                <div>
                     <nav className="dash-header__nav">
                             {buttonContent}
                     </nav>
                 </div>
+
                 
             </header>
         </>

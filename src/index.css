@@ -32,6 +32,11 @@ body{
     
 }
 
+.wrapper{
+    width: min(300px, 100%, 3rem);
+    margin-inline: auto;
+}
+
 header, main, footer{
     display: flex;
     place-content: center;
@@ -67,7 +72,7 @@ header, main, footer{
 
 header {
     top: 0;
-    max-height: 13vh;
+    max-height: 15vh;
 } 
 
 header, footer{
@@ -102,6 +107,11 @@ footer {
 
 
 
+.dash-header__title{
+    color: #F1F1C3;
+    text-decoration: underline;
+    padding: 0.5rem;
+}
 
 .dash-container {
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(16, 4, 4, 1)), url('./img/background_welcome.jpg');
@@ -116,6 +126,13 @@ footer {
     position: sticky;
     /*z-index: 1;*/
 }
+
+
+.user__span{
+    font-size: 28px;
+    font-weight: bold;
+}
+
 
 thead,
 tbody,
@@ -133,6 +150,19 @@ tr {
     overflow-x: auto;
     overflow-y: auto;
     padding: 1.5rem;
+}
+
+.table__th,
+.table__cell {
+  background-color: var(--TABLE-BGCOLOR);
+  text-align: left;
+  border: 1px solid var(--TABLE-COLOR);
+  padding: 0.5em;
+}
+
+.table__cell:last-child {
+  display: grid;
+  place-content: center;
 }
 
 .dash-header__nav{
@@ -161,4 +191,24 @@ tr {
     width: auto;
     height: auto;
     place-content: center;
+}
+
+.nav_foot_background{
+    background-color: #e1378356;
+    display: flex;
+    place-content: center;
+}
+
+
+
+@media screen and (min-width: 768px) {
+  
+    .table {
+      font-size: 1.5rem;
+    }
+  
+    .table--notes {
+      grid-template-columns: repeat(3, 1fr) 2fr repeat(2, 1fr);
+    }
+  
 }
