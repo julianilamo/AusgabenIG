@@ -1,4 +1,5 @@
 import { store } from '../../app/store'
+import { ausgabenApiSlice } from '../expenses/ausgabenApiSlice';
 import { notesApiSlice } from '../notes/notesApiSlice'
 import { usersApiSlice } from '../users/usersApiSlice';
 import { useEffect } from 'react';
@@ -9,6 +10,7 @@ const Prefetch = () => {
     useEffect(() => {
         store.dispatch(notesApiSlice.util.prefetch('getNotes', 'notesList', { force: true }))
         store.dispatch(usersApiSlice.util.prefetch('getUsers', 'usersList', { force: true }))
+        store.dispatch(ausgabenApiSlice.util.prefetch('getAusgaben', 'ausgabenList', { force: true }))
         
         //console.log('subscribing')
         //const notes = store.dispatch(notesApiSlice.endpoints.getNotes.initiate())

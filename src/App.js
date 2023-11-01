@@ -15,6 +15,7 @@ import PersistLogin from "./features/auth/PersistLogin";
 import RequireAuth from "./features/auth/RequireAuth";
 import { ROLES } from "./config/roles";
 import useTitle from "./hooks/useTitle";
+import AusgabenList from "./features/expenses/AusgabenList";
 
 function App() {
   useTitle('Ausgaben IG')
@@ -38,6 +39,10 @@ function App() {
                     <Route index element= {<UsersList />} />
                     <Route path=":id" element={<EditUser />} />
                     <Route path="new" element={<NewUserForm />} />
+                  </Route>
+
+                  <Route path="ausgaben">
+                    <Route index element= {<AusgabenList />} />
                   </Route>
                 </Route>
 

@@ -18,8 +18,7 @@ const Welcome = () => {
                 <h2>Wir lieben Mateo so sehr</h2>
                 <h2>Und Alejandro Liebe Sarah so so sehr auch</h2>
 
-                <p><Link to="/dash/notes" className="Link__class display:none">View techNotes</Link></p>
-                <p><Link to="/dash/notes/new" className="Link__class">Add New techNote</Link></p>
+                <p><Link to="/dash/ausgaben" className="Link__class">View Ausgaben</Link></p>
 
                 {(isManager|| isAdmin) && <p><Link to="/dash/users" className="Link__class">View User Settings</Link></p>}
                 {(isManager|| isAdmin) && <p><Link to="/dash/users/new" className="Link__class">Add New User</Link></p>}
@@ -34,3 +33,6 @@ const Welcome = () => {
 }
 
 export default Welcome
+
+/*<p><Link to="/dash/notes" className="Link__class">View techNotes</Link></p>
+                <p><Link to="/dash/notes/new" className="Link__class">Add New techNote</Link></p>*/
