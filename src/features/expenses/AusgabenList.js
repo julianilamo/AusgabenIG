@@ -37,21 +37,24 @@ const AusgabenList = () => {
         const tableContent = ids?.length && filteredIds.map(ausgabenId => <Ausgaben key={ausgabenId} ausgabeId={ausgabenId} />)
 
         content = (
-            <table className="">
-                <thead className="">
-                    <tr>
-                        <th scope="col" className="table__th note__status">Spesenname</th>
-                        <th scope="col" className="table__th note__created">Kostenwert</th>
-                        <th scope="col" className="table__th note__updated">Beschreibung</th>
-                        <th scope="col" className="table__th note__title">Kaufdatum</th>
-                        <th scope="col" className="table__th note__username">Owner</th>
-                        <th scope="col" className="table__th note__edit">Edit</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {tableContent}
-                </tbody>
-            </table>
+            <div className="table__container dash-dipers">
+                <table className="ausg_table">
+                    <thead className="">
+                        <tr>
+                            <th className="table__th note__status">Spesenname</th>
+                            <th className="table__th note__created">Kostenwert</th>
+                            <th className="table__th note__updated">Beschreibung</th>
+                            <th className="table__th note__title">Kaufdatum</th>
+                            <th className="table__th note__username">Nutzer</th>
+                            <th className="table__th note__edit">Bearbeiten</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {tableContent}
+                    </tbody>
+                </table>
+            </div>
+            
         )
     }
 

@@ -15,23 +15,24 @@ const Ausgabe = ({ ausgabeId }) => {
 
     const navigate = useNavigate()
 
+    
+
     if (ausgabe) {
         //const created = new Date(ausgabe.createdAt).toLocaleString('en-US', { day: 'numeric', month: 'long' })
 
         //const updated = new Date(ausgabe.updatedAt).toLocaleString('en-US', { day: 'numeric', month: 'long' })
-        console.log("working here")
         const handleEdit = () => navigate(`/dash/ausgaben/${ausgabeId}`)
 
         return (
-            <tr className="">
-                <td className="table__cell note__status">{ausgabe.expenseName}</td>
-                <td className="table__cell note__title">{ausgabe.valueAusgaben}</td>
-                <td className="table__cell note__username">{ausgabe.textAusgaben}</td>
-                <td className="table__cell note__username">{ausgabe.boughtDate}</td>
-                <td className="table__cell note__username">{ausgabe.username}</td>
-                <td className="table__cell">
+            <tr>
+                <td className="table__cell" data-cell="spesenname">{ausgabe.expenseName}</td>
+                <td className="table__cell" data-cell="kostenwert">{ausgabe.valueAusgaben}</td>
+                <td className="table__cell" data-cell="beschreibung">{ausgabe.textAusgaben}</td>
+                <td className="table__cell" data-cell="kaufdatum">{ausgabe.boughtDate}</td>
+                <td className="table__cell" data-cell="nutzer">{ausgabe.username}</td>
+                <td className="table__cell" data-cell="bearbeiten">
                     <button
-                        className="icon-button table__button"
+                        className="icon-button"
                         onClick={handleEdit}
                     >
                         <FontAwesomeIcon icon={faPenToSquare} />

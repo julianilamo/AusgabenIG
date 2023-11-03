@@ -1,12 +1,25 @@
-import { Outlet } from "react-router-dom"
+import { Outlet, useLocation } from "react-router-dom"
 import DashHeader from "./DashHeader"
 import DashFooter from "./DashFooter"
 
 const DashLayout = () => {
+
+    function getClassName(pathName) {
+        switch (pathName) {
+          case '/dash/ausgaben':
+            return 'dash-container-dipers';
+          default:
+            return 'dash-container';
+        }
+    }
+
+    const {pathname} = useLocation()
+    console.log(pathname)
+
     return (
         <>
         <DashHeader />
-            <div className="dash-container">
+            <div className={getClassName(pathname)}>
                 <Outlet ></Outlet>
             </div>
             <DashFooter />
