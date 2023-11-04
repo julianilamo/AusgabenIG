@@ -129,7 +129,7 @@ footer {
 
 .dash-container-dipers{
     background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(16, 4, 4, 0.9)), url('./img/background_dipers.jpg');
-    background-size: cover;
+    background-size: contain;
     background-position: 50% 0;
     padding: 0.75em 0.5em 0.5em;
     flex-grow: 1;
@@ -234,6 +234,14 @@ footer {
 
 @media screen and (max-width: 680px) {
     
+    .dash-container-dipers{
+        background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(16, 4, 4, 0.9)), url('./img/background_dipers.jpg');
+        background-size: contain;
+        background-position: 50% 0;
+        padding: 0.75em 0.5em 0.5em;
+        flex-grow: 1;
+    }
+
     th {
         display: none;
     }

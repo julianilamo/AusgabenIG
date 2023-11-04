@@ -16,6 +16,7 @@ import RequireAuth from "./features/auth/RequireAuth";
 import { ROLES } from "./config/roles";
 import useTitle from "./hooks/useTitle";
 import AusgabenList from "./features/expenses/AusgabenList";
+import NewAusgabe from "./features/expenses/NewAusgabe";
 
 function App() {
   useTitle('Ausgaben IG')
@@ -43,6 +44,7 @@ function App() {
 
                   <Route path="ausgaben">
                     <Route index element= {<AusgabenList />} />
+                    <Route path="new" element={<NewAusgabe />} />
                   </Route>
                 </Route>
 
