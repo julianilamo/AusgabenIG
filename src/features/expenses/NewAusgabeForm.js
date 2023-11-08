@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+//import { useNavigate } from "react-router-dom"
 import { useAddNewAusgabenMutation } from "./ausgabenApiSlice"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave } from "@fortawesome/free-solid-svg-icons"
-import currencyRow from "./currencyRow"
+import CurrencyRow from "./CurrencyRow"
 
 const NewAusgabeForm = ({users})=>{
     const [addNewAusgabe, {
@@ -14,21 +14,44 @@ const NewAusgabeForm = ({users})=>{
     }]= useAddNewAusgabenMutation()
 
     const [maxDate] = useState(new Date().toISOString().split('T')[0]);
+    const baseURLfetchRates = `https://openexchangerates.org/api/latest.json?app_id=${process.env.REACT_APP_API_EXCHANGE_ACCESS_KEY}`
+    const baseForAusg = "EUR"
     //const navigate = useNavigate()
 
     const [expense, setExpense] = useState('')
-    const [valueAusgaben, setValueAusgaben] = useState('')
+    const [valueAusgaben, setValueAusgaben] = useState(0)
     const [textAusgaben, setTextAusgaben] = useState('')
     const [boughtDate, setBoughtDate] = useState(maxDate)    
     const [userId, setUserId] = useState(users[0].id)
     const [message, setMessage] = useState('')
+    //Currency effects
+    const [currencyOptions, setCurrencyOptions] = useState([])
+    const [currencyRates, setCurrencyRates] = useState({})
+    const [fromCurrency, setFromCurrency] = useState(baseForAusg)
+    const [convertionAusg, setConvertionAusg] = useState(1)
+    //const [toCurrency, setToCurrency] = useState()
+
+
+ 
 
     useEffect(()=>{
+        fetch(baseURLfetchRates)
+        .then(res=>res.json())
+        .then(data => {
+            
+            
+
+            setCurrencyOptions([...Object.keys(data.rates)])
+            setCurrencyRates(data.rates)
+            setFromCurrency(baseForAusg)
+            //setToCurrency(baseForAusg)
+        })
+
         if (isSuccess){
             setExpense('')
             setValueAusgaben('')
             setTextAusgaben('')
-            setBoughtDate(maxDate)
+            setBoughtDate('')
             setUserId('')
             //navigate('/dash/notes')
         }
@@ -38,11 +61,24 @@ const NewAusgabeForm = ({users})=>{
     }, [isSuccess, message]) //[isSuccess, navigate])
 
     const onExpenseChanged = e => setExpense(e.target.value)
-    const onValueAusgabenChanged = e => setValueAusgaben(e.target.value)
+    //const onValueAusgabenChanged = e => setValueAusgaben(e.target.value)
     const onTextChanged = e => setTextAusgaben(e.target.value)
     const onBoughtDateChanged = e => setBoughtDate(e.target.value)
     const onUserIdChanged = e=> setUserId(e.target.value)
 
+    let rateAusg, valConvAusg
+    rateAusg = currencyRates[baseForAusg]/currencyRates[fromCurrency]
+    valConvAusg = rateAusg*valueAusgaben
+
+    
+    
+    
+    
+    const onValueAusgabenChanged = (e) =>{
+        setValueAusgaben(e.target.value)
+        setConvertionAusg(valConvAusg)
+    }
+            
     const canSave = [expense, valueAusgaben, boughtDate, userId].every(Boolean) && !isLoading
 
     const onSaveAusgabenClicked = async (e) => {
@@ -68,6 +104,7 @@ const NewAusgabeForm = ({users})=>{
     })
 
     const errClass = isError ? "errmsg" : "offscreen"
+    const displayConvertion = fromCurrency === "EUR" ? "displayingComponent" : ""
     
 
     const content = (
@@ -103,7 +140,7 @@ const NewAusgabeForm = ({users})=>{
 
                 <label className="form__label" htmlFor="valAusgaben">
                     Kostenwert</label>
-                <input className=""
+                <input className="input__valAusgaben"
                     type="number"
                     id="valAusgaben" 
                     name="valAusgaben"
@@ -113,7 +150,26 @@ const NewAusgabeForm = ({users})=>{
                     onChange={onValueAusgabenChanged}
                 />
 
-                <currencyRow/>
+                <CurrencyRow 
+                    currencyOptions={currencyOptions}
+                    selectedCurrency={fromCurrency}
+                    const onChangeCurrency = {e => (
+                        setFromCurrency(e.target.value))
+                    }
+                
+                    
+                />
+                
+                <div className={displayConvertion}>
+                    <label className="form__label" htmlFor="ConvertionAusgaben">in Euro</label>
+                    <input className="input__valAusgaben"
+                        type="number"
+                        id="ConvertionAusgaben"
+                        name="ConvertionAusgaben"
+                        value={valConvAusg}
+                        readOnly
+                    />
+                </div>
 
                 <label className="form__label" htmlFor="textAusgaben">
                     Beschreibung:</label>
@@ -161,3 +217,15 @@ const NewAusgabeForm = ({users})=>{
 
 
 export default NewAusgabeForm
+
+
+
+/*              Rates for second option
+                <div>
+                    <h1>=</h1>
+                    <CurrencyRow
+                        currencyOptions={currencyOptions}
+                        selectedCurrency={toCurrency}
+                        const onChangeCurrency = {e => setToCurrency(e.target.value)}
+                    />
+                </div> */

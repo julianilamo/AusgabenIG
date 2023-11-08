@@ -10,7 +10,7 @@ const Prefetch = () => {
     useEffect(() => {
         store.dispatch(notesApiSlice.util.prefetch('getNotes', 'notesList', { force: true }))
         store.dispatch(usersApiSlice.util.prefetch('getUsers', 'usersList', { force: true }))
-        store.dispatch(ausgabenApiSlice.util.prefetch('getAusgaben', 'ausgabenList', { force: true }))
+        store.dispatch(ausgabenApiSlice.util.prefetch('getAusgaben', 'ausgabenList', { force: true }))       
         
         //console.log('subscribing')
         //const notes = store.dispatch(notesApiSlice.endpoints.getNotes.initiate())

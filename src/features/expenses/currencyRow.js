@@ -1,12 +1,28 @@
 import React from "react";
 
-const currencyRow=()=>{
+function currencyRow(props){
+    const {
+        currencyOptions,
+        selectedCurrency,
+        onChangeCurrency
+    } = props
+
+    const listOfCoins = ["EUR", "COP"]
+
     return(
         <>
-            <div>
-                <p>CurrencyRow</p>
-            </div>
+            <select className="input__select" value={selectedCurrency} onChange={onChangeCurrency}>
+                {currencyOptions.map(option=>{
+                    let selOption
+                    if (listOfCoins.includes(option)){
+                        selOption = <option key={option} value={option}>{option}</option>
+                    }
+                    return selOption
+                    })}
+                
+            </select>
         </>
+            
     )
 }
 

@@ -232,6 +232,21 @@ footer {
 
 
 
+/* Forms*/
+
+.input__valAusgaben{
+    padding: .25rem;
+    width: 10em;
+}
+
+.input__select{
+    margin-left: 0.5rem;
+}
+
+.displayingComponent{
+    display: none;
+}
+
 @media screen and (max-width: 680px) {
     
     .dash-container-dipers{
