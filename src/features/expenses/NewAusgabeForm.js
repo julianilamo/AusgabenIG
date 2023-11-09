@@ -23,12 +23,12 @@ const NewAusgabeForm = ({users})=>{
     const [textAusgaben, setTextAusgaben] = useState('')
     const [boughtDate, setBoughtDate] = useState(maxDate)    
     const [userId, setUserId] = useState(users[0].id)
-    const [message, setMessage] = useState('')
+    //const [message, setMessage] = useState('')
     //Currency effects
     const [currencyOptions, setCurrencyOptions] = useState([])
     const [currencyRates, setCurrencyRates] = useState({})
     const [fromCurrency, setFromCurrency] = useState(baseForAusg)
-    const [convertionAusg, setConvertionAusg] = useState(1)
+    //const [convertionAusg, setConvertionAusg] = useState(1)
     //const [toCurrency, setToCurrency] = useState()
 
 
@@ -51,14 +51,14 @@ const NewAusgabeForm = ({users})=>{
             setExpense('')
             setValueAusgaben('')
             setTextAusgaben('')
-            setBoughtDate('')
-            setUserId('')
+            setBoughtDate(maxDate)
+            setUserId(userId)
             //navigate('/dash/notes')
         }
-        if (message){
+        /*if (message){
             alert(message)
-        }
-    }, [isSuccess, message]) //[isSuccess, navigate])
+        }*/
+    }, [isSuccess]) //[isSuccess, navigate])
 
     const onExpenseChanged = e => setExpense(e.target.value)
     //const onValueAusgabenChanged = e => setValueAusgaben(e.target.value)
@@ -76,17 +76,24 @@ const NewAusgabeForm = ({users})=>{
     
     const onValueAusgabenChanged = (e) =>{
         setValueAusgaben(e.target.value)
-        setConvertionAusg(valConvAusg)
+        //setConvertionAusg(valConvAusg)
     }
-            
-    const canSave = [expense, valueAusgaben, boughtDate, userId].every(Boolean) && !isLoading
+    
+    const canSave = [expense, valueAusgaben, boughtDate, userId, fromCurrency].every(Boolean) && !isLoading
+    let valAusg = valueAusgaben
+
 
     const onSaveAusgabenClicked = async (e) => {
         e.preventDefault()
 
         if (canSave){
-            await addNewAusgabe({userAusgaben: userId,  expenseName: expense, valueAusgaben, textAusgaben, boughtDate})
-            setMessage("Your form has been correctly submited!")
+            if (fromCurrency === baseForAusg) {
+                valAusg = valueAusgaben
+            }else{
+                valAusg = valueAusgaben*rateAusg
+            }
+            await addNewAusgabe({userAusgaben: userId,  expenseName: expense, valueAusgaben: valAusg, textAusgaben, boughtDate, coinAusgaben: fromCurrency})
+            alert("Your form has been correctly submited!")
         }else{
             alert("Cannot save yet")
         }
@@ -145,7 +152,7 @@ const NewAusgabeForm = ({users})=>{
                     id="valAusgaben" 
                     name="valAusgaben"
                     min="0"
-                    max="10000000"
+                    max="100000000000000000000000"
                     value={valueAusgaben}
                     onChange={onValueAusgabenChanged}
                 />
