@@ -11,7 +11,7 @@ function currencyRow(props){
 
     return(
         <>
-            <select className="input__select" value={selectedCurrency} onChange={onChangeCurrency}>
+            <select id="coinSelect" className="input__select" value={selectedCurrency} onChange={onChangeCurrency}>
                 {currencyOptions.map(option=>{
                     let selOption
                     if (listOfCoins.includes(option)){

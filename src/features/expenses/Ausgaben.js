@@ -23,10 +23,11 @@ const Ausgabe = ({ ausgabeId }) => {
         //const updated = new Date(ausgabe.updatedAt).toLocaleString('en-US', { day: 'numeric', month: 'long' })
         const handleEdit = () => navigate(`/dash/ausgaben/${ausgabeId}`)
         const boughtDateAusg = new Date(ausgabe.boughtDate).toLocaleString('DE', { day: 'numeric', month: 'long' })
+        const value = (ausgabe.valueAusgaben).toFixed(2)
         return (
             <tr>
                 <td className="table__cell" data-cell="spesenname">{ausgabe.expenseName}</td>
-                <td className="table__cell" data-cell="kostenwert">{ausgabe.valueAusgaben}</td>
+                <td className="table__cell" data-cell="kostenwert">€{value}</td>
                 <td className="table__cell" data-cell="beschreibung">{ausgabe.textAusgaben}</td>
                 <td className="table__cell" data-cell="kaufdatum">{boughtDateAusg}</td>
                 <td className="table__cell" data-cell="nutzer">{ausgabe.username}</td>

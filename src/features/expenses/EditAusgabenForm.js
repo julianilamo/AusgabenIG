@@ -1,38 +1,41 @@
 import { useState, useEffect } from "react"
-//import { useNavigate } from "react-router-dom"
-import { useAddNewAusgabenMutation } from "./ausgabenApiSlice"
+import { useUpdateAusgabenMutation, useDeleteAusgabenMutation } from "./ausgabenApiSlice"
+import { useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSave } from "@fortawesome/free-solid-svg-icons"
+import { faSave, faTrashCan } from "@fortawesome/free-solid-svg-icons"
 import CurrencyRow from "./CurrencyRow"
+import useAuth from "../../hooks/useAuth"
 
-const NewAusgabeForm = ({users})=>{
-    const [addNewAusgabe, {
+const EditAusgabenForm = ({ausgabe, users}) =>{
+    const {isManager, isAdmin } = useAuth()
+
+    const [updateAusgabe,{
         isLoading,
         isSuccess,
         isError,
         error
-    }]= useAddNewAusgabenMutation()
+    }] = useUpdateAusgabenMutation()
+
+    const [deleteAusgabe, {
+        isLoading: isDelSuccess,
+        isError: isDelError,
+        error: delError
+    }] = useDeleteAusgabenMutation()
+
+    const navigate = useNavigate()
 
     const [maxDate] = useState(new Date().toISOString().split('T')[0]);
     const baseURLfetchRates = `https://openexchangerates.org/api/latest.json?app_id=${process.env.REACT_APP_API_EXCHANGE_ACCESS_KEY}`
     const baseForAusg = "EUR"
-    //const navigate = useNavigate()
 
-    const [expense, setExpense] = useState('')
-    const [valueAusgaben, setValueAusgaben] = useState(0)
-    const [textAusgaben, setTextAusgaben] = useState('')
-    const [boughtDate, setBoughtDate] = useState(maxDate)    
-    const [userId, setUserId] = useState(users[0].id)
-    //const [message, setMessage] = useState('')
-    //Currency effects
+    const [expense, setExpense] = useState(ausgabe.expenseName)
+    const [valueAusgaben, setValueAusgaben] = useState(ausgabe.valueAusgaben)
+    const [textAusgaben, setTextAusgaben] = useState(ausgabe.textAusgaben)
+    const [boughtDate, setBoughtDate] = useState(new Date(ausgabe.boughtDate).toISOString().split('T')[0])    
+    const [userId, setUserId] = useState(ausgabe.userAusgaben)
     const [currencyOptions, setCurrencyOptions] = useState([])
     const [currencyRates, setCurrencyRates] = useState({})
     const [fromCurrency, setFromCurrency] = useState(baseForAusg)
-    //const [convertionAusg, setConvertionAusg] = useState(1)
-    //const [toCurrency, setToCurrency] = useState()
-
-
- 
 
     useEffect(()=>{
         fetch(baseURLfetchRates)
@@ -40,34 +43,27 @@ const NewAusgabeForm = ({users})=>{
         .then(data => {
             setCurrencyOptions([...Object.keys(data.rates)])
             setCurrencyRates(data.rates)
-            setFromCurrency(baseForAusg)
-            //setToCurrency(baseForAusg)
         })
 
-        if (isSuccess){
+        if (isSuccess || isDelSuccess){
             setExpense('')
             setValueAusgaben('')
             setTextAusgaben('')
             setBoughtDate(maxDate)
             setUserId(userId)
-            //navigate('/dash/notes')
+            navigate('/dash/ausgaben')
         }
-        /*if (message){
-            alert(message)
-        }*/
-    }, [isSuccess]) //[isSuccess, navigate])
+
+    }, [isSuccess, isDelSuccess, navigate]) 
 
     const onExpenseChanged = e => setExpense(e.target.value)
-    //const onValueAusgabenChanged = e => setValueAusgaben(e.target.value)
     const onTextChanged = e => setTextAusgaben(e.target.value)
     const onBoughtDateChanged = e => setBoughtDate(e.target.value)
     const onUserIdChanged = e=> setUserId(e.target.value)
 
     let rateAusg, valConvAusg
     rateAusg = currencyRates[baseForAusg]/currencyRates[fromCurrency]
-    valConvAusg = rateAusg*valueAusgaben
     valConvAusg = (rateAusg*valueAusgaben).toFixed(3)
-
     
     
     
@@ -82,18 +78,22 @@ const NewAusgabeForm = ({users})=>{
 
 
     const onSaveAusgabenClicked = async (e) => {
-        e.preventDefault()
-
         if (canSave){
             if (fromCurrency === baseForAusg) {
                 valAusg = valueAusgaben
             }else{
                 valAusg = valueAusgaben*rateAusg
             }
-            await addNewAusgabe({userAusgaben: userId,  expenseName: expense, valueAusgaben: valAusg, textAusgaben, boughtDate, coinAusgaben: fromCurrency})
-            alert("Your form has been correctly submited!")
-        }else{
-            alert("Cannot save yet")
+
+            await updateAusgabe({id: ausgabe.id , userAusgaben: userId,  expenseName: expense, valueAusgaben: valAusg, textAusgaben, boughtDate, coinAusgaben: fromCurrency})
+            alert("Your form has been correctly updated!")
+        }
+    }
+
+    const onDeleteAusgabeClicked = async () =>{
+        let confirmDel = window.confirm("Möchten Sie diesen Ausgabe eliminieren?")
+        if(confirmDel){
+            await deleteAusgabe({ id: ausgabe.id })
         }
     }
 
@@ -108,26 +108,40 @@ const NewAusgabeForm = ({users})=>{
         )
     })
 
-    const errClass = isError ? "errmsg" : "offscreen"
+    const errClass = (isError|| isDelError) ? "errmsg" : "displayingComponent"
     const displayConvertion = fromCurrency === "EUR" ? "displayingComponent" : ""
-    
+
+    let deleteButton = null
+    if (isManager || isAdmin){
+        deleteButton = (
+            <button
+                className="icon-button"
+                title="Delete"
+                onClick={onDeleteAusgabeClicked}
+            >
+                <FontAwesomeIcon icon={faTrashCan} />
+            </button>
+        )
+    }
 
     const content = (
         <>
-            <p className={errClass}>{error?.data?.message}</p>
+            <p className={errClass}>{error?.data?.message || delError?.data?.message} ?? ''</p>
 
-            <form className="form" onSubmit={onSaveAusgabenClicked}>
+            <form className="form" onSubmit={e => e.preventDefault()}>
                 <div className="form__title-row">
-                    <h2>New Ausgaben</h2>
+                    <h2>Edit Ausgaben</h2>
                     <div className="form__action-buttons">
                         <button
                             className="icon-button"
                             title="Save"
+                            onClick={onSaveAusgabenClicked}
                             disabled={!canSave}
                             
                         >
                             <FontAwesomeIcon icon={faSave} />          
                         </button>
+                        {deleteButton}
                     </div>
                 </div>
 
@@ -220,17 +234,4 @@ const NewAusgabeForm = ({users})=>{
 
 }
 
-
-export default NewAusgabeForm
-
-
-
-/*              Rates for second option
-                <div>
-                    <h1>=</h1>
-                    <CurrencyRow
-                        currencyOptions={currencyOptions}
-                        selectedCurrency={toCurrency}
-                        const onChangeCurrency = {e => setToCurrency(e.target.value)}
-                    />
-                </div> */
+export default EditAusgabenForm

@@ -1,19 +1,19 @@
 import { useParams } from "react-router-dom"
-import EditNoteForm from "./EditNoteForm"
-import { useGetNotesQuery } from "./notesApiSlice"
+import EditAusgabenForm from "./EditAusgabenForm"
+import { useGetAusgabenQuery } from "./ausgabenApiSlice"
 import { useGetUsersQuery } from "../users/usersApiSlice"
 import useAuth from "../../hooks/useAuth"
 import PulseLoader from 'react-spinners/PulseLoader'
 
 
-const EditNote = () => {
+const EditAusgaben = () =>{
     const {id} = useParams()
 
     const {username, isManager, isAdmin} = useAuth()
-    
-    const {note} = useGetNotesQuery("notesList", {
+
+    const {ausgabe} = useGetAusgabenQuery("ausgabenList", {
         selectFromResult: ({data}) => ({
-            note: data?.entities[id]
+            ausgabe: data?.entities[id]
         }),
     })
 
@@ -23,18 +23,17 @@ const EditNote = () => {
         }),
     })
 
-
-    if (!note || !users?.length) return <PulseLoader color={"#FFF"} />
+    if (!ausgabe || !users?.length) return <PulseLoader color={"#FFF"} />
 
     if (!isManager || !isAdmin){
-        if(note.username !== username){
+        if(ausgabe.username !== username){
             return <p className="errmsg">No access</p>
         }
     }
 
-    const content = <EditNoteForm note = {note} users = {users} />
+    const content = <EditAusgabenForm ausgabe = {ausgabe} users = {users} />
 
     return content
 }
 
-export default EditNote
+export default EditAusgaben
