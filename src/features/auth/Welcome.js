@@ -19,6 +19,7 @@ const Welcome = () => {
                 <h2>Und Alejandro Liebe Sarah so so sehr auch</h2>
 
                 <p><Link to="/dash/ausgaben" className="Link__class">View Ausgaben</Link></p>
+                <p><Link to="/dash/ausgaben/new" className="Link__class">Create new Ausgaben</Link></p>
 
                 {(isManager|| isAdmin) && <p><Link to="/dash/users" className="Link__class">View User Settings</Link></p>}
                 {(isManager|| isAdmin) && <p><Link to="/dash/users/new" className="Link__class">Add New User</Link></p>}
