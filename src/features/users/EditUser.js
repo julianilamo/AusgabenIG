@@ -8,7 +8,6 @@ import { PulseLoader } from "react-spinners/PulseLoader"
 const EditUser = () => {
     const { id } = useParams()
 
-    //const user = useSelector(state => selectUserById(state, id))
     const { user } = useGetUsersQuery("usersList", {
         selectFromResult: ({ data }) => ({
             user: data?.entities[id]

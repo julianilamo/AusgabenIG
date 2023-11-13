@@ -42,13 +42,14 @@ function App() {
                     <Route path=":id" element={<EditUser />} />
                     <Route path="new" element={<NewUserForm />} />
                   </Route>
+                  
+                </Route>
 
-                  <Route path="ausgaben">
+                <Route path="ausgaben">
                     <Route index element= {<AusgabenList />} />
                     <Route path=":id" element={<EditAusgaben /> } />
                     <Route path="new" element={<NewAusgabe />} />
                   </Route>
-                </Route>
 
                 <Route path="notes">
                   <Route index element= {<NotesList />} />

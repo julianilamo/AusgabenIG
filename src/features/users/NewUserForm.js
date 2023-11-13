@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave } from "@fortawesome/free-solid-svg-icons"
 import { ROLES } from "../../config/roles"
+import { FAMILIEN } from "../../config/familien"
 
 const USER_REGEX = /^[A-z]{3,20}$/
 const PWD_REGEX = /^[A-z0-9]{4,12}$/
@@ -21,6 +22,7 @@ const NewUserForm = () =>{
     const [validUsername, setvalidUsername] = useState(false)
     const [password, setPassword] = useState('')
     const [validPassword, setValidPassword] = useState(false)
+    const [familie, setFamilie] = useState('Ilamo Guthnick')
     const [roles, setRoles] = useState(["Employee"])
 
     useEffect(()=>{
@@ -36,12 +38,14 @@ const NewUserForm = () =>{
             setUsername('')
             setPassword('')
             setRoles([])
+            setFamilie('')
             navigate('/dash/users')
         }
     }, [isSuccess, navigate])
 
     const onUsernameChanged = e => setUsername(e.target.value)
     const onPasswordChanged = e => setPassword(e.target.value)
+    const onFamilieChanged = e => setFamilie(e.target.value)
 
     const onRolesChanged = e =>{
         const values = Array.from(
@@ -51,12 +55,12 @@ const NewUserForm = () =>{
         setRoles(values)
     }
 
-    const canSave = [roles.length, validUsername, validPassword].every(Boolean) && !isLoading
+    const canSave = [roles.length, validUsername, validPassword, familie].every(Boolean) && !isLoading
 
     const onSaveUserClicked = async (e) =>{
         e.preventDefault()
         if (canSave) {
-            await addNewUser({username, password, roles})
+            await addNewUser({username, password, roles, familie})
         }
     }
 
@@ -67,6 +71,15 @@ const NewUserForm = () =>{
                 value={role}
 
             >{role}</option>
+        )
+    })
+
+    const familieOptions = Object.values(FAMILIEN).map(familie =>{
+        return(
+            <option
+                key={familie}
+                value={familie}
+            >{familie}</option>
         )
     })
 
@@ -127,6 +140,18 @@ const NewUserForm = () =>{
                     onChange={onRolesChanged}
                 >
                     {options}
+                </select>
+
+                <label className="" htmlFor="familien">
+                    FAMILIEN:
+                </label>
+                <select
+                    id="familien"
+                    name="familien"
+                    value={familie}
+                    onChange={onFamilieChanged}
+                >
+                    {familieOptions}
                 </select>
 
             </form>

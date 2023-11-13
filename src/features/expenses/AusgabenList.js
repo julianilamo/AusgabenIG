@@ -28,13 +28,17 @@ const AusgabenList = () => {
     if (isSuccess) {
         const {ids, entities } = ausgaben
         let filteredIds
+        let filteredExpenseValue
         if (isManager || isAdmin) {
             filteredIds = [...ids]
+            filteredExpenseValue = filteredIds.map(IDforVal => entities[IDforVal].valueAusgaben)
         }else{
-            filteredIds = ids.filter(ausgabenId => entities[ausgabenId].userAusgaben === username)
+            filteredIds = ids.filter(ausgabenId => entities[ausgabenId].username === username)
+            filteredExpenseValue = [filteredIds.map(IDforVal => entities[IDforVal].valueAusgaben)]
         }
 
         const tableContent = ids?.length && filteredIds.map(ausgabenId => <Ausgaben key={ausgabenId} ausgabeId={ausgabenId} />)
+        const TotalAusgaben = filteredExpenseValue.reduce((a, b) => a + b, 0).toFixed(2)
 
         content = (
             <div className="table__container dash-dipers">
@@ -51,6 +55,14 @@ const AusgabenList = () => {
                     </thead>
                     <tbody>
                         {tableContent}
+                        <tr>
+                            <td className="table__cell" data-cell="spesenname">TOTAL</td>
+                            <td className="table__cell" data-cell="kostenwert">{TotalAusgaben}</td>
+                            <td className="table__cell" data-cell="beschreibung"></td>
+                            <td className="table__cell" data-cell="kaufdatum"></td>
+                            <td className="table__cell" data-cell="nutzer"></td>
+                            <td className="table__cell" data-cell="bearbeiten"></td>
+                         </tr>
                     </tbody>
                 </table>
             </div>
