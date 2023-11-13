@@ -24,22 +24,24 @@ const Ausgabe = ({ ausgabeId }) => {
         const handleEdit = () => navigate(`/dash/ausgaben/${ausgabeId}`)
         const boughtDateAusg = new Date(ausgabe.boughtDate).toLocaleString('DE', { day: 'numeric', month: 'long' })
         const value = (ausgabe.valueAusgaben).toFixed(2)
+       // const sumValues = obj => Object.values(obj).reduce((a, b) => a + b, 0);
+       // const totalValues = sumValues(value)
         return (
-            <tr>
-                <td className="table__cell" data-cell="spesenname">{ausgabe.expenseName}</td>
-                <td className="table__cell" data-cell="kostenwert">€{value}</td>
-                <td className="table__cell" data-cell="beschreibung">{ausgabe.textAusgaben}</td>
-                <td className="table__cell" data-cell="kaufdatum">{boughtDateAusg}</td>
-                <td className="table__cell" data-cell="nutzer">{ausgabe.username}</td>
-                <td className="table__cell" data-cell="bearbeiten">
-                    <button
-                        className="icon-button"
-                        onClick={handleEdit}
-                    >
-                        <FontAwesomeIcon icon={faPenToSquare} />
-                    </button>
-                </td>
-            </tr>
+                <tr>
+                    <td className="table__cell" data-cell="spesenname">{ausgabe.expenseName}</td>
+                    <td className="table__cell" data-cell="kostenwert">€{value}</td>
+                    <td className="table__cell" data-cell="beschreibung">{ausgabe.textAusgaben}</td>
+                    <td className="table__cell" data-cell="kaufdatum">{boughtDateAusg}</td>
+                    <td className="table__cell" data-cell="nutzer">{ausgabe.username}</td>
+                    <td className="table__cell" data-cell="bearbeiten">
+                        <button
+                            className="icon-button"
+                            onClick={handleEdit}
+                        >
+                            <FontAwesomeIcon icon={faPenToSquare} />
+                        </button>
+                    </td>
+                </tr>
         )
 
     } else return null

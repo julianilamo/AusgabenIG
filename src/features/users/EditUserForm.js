@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave, faTrashCan } from "@fortawesome/free-solid-svg-icons"
 import { ROLES } from "../../config/roles"
+import { FAMILIEN } from "../../config/familien"
 
 const USER_REGEX = /^[A-z]{3,20}$/
 const PWD_REGEX = /^[A-z0-9]{4,12}$/
@@ -29,6 +30,7 @@ const EditUserForm = ({ user }) => {
     const [validUsername, setvalidUsername] = useState(false)
     const [password, setPassword] = useState('')
     const [validPassword, setValidPassword] = useState(false)
+    const [familie, setFamilie] = useState('Ilamo Guthnick')
     const [roles, setRoles] = useState(user.roles)
     const [active, setActive] = useState(user.active)
     
@@ -44,6 +46,7 @@ const EditUserForm = ({ user }) => {
         if(isSuccess || isDelSuccess){
             setUsername('')
             setPassword('')
+            setFamilie('')
             setRoles([])
             navigate('/dash/users')
         }
@@ -51,6 +54,7 @@ const EditUserForm = ({ user }) => {
 
     const onUsernameChanged = e => setUsername(e.target.value)
     const onPasswordChanged = e => setPassword(e.target.value)
+    const onFamilieChanged = e => setFamilie(e.target.value)
 
     const onRolesChanged = e => {
         const values = Array.from(
@@ -64,9 +68,9 @@ const EditUserForm = ({ user }) => {
 
     const onSaveUserClicked = async (e) =>{
         if(password){
-            await updateUser({id: user.id, username, password, roles, active})
+            await updateUser({id: user.id, username, password, roles, active, familie})
         }else{
-            await updateUser({ id: user.id, username, roles, active})
+            await updateUser({ id: user.id, username, roles, active, familie})
         }
     }
 
@@ -84,11 +88,20 @@ const EditUserForm = ({ user }) => {
         )
     })
 
+    const familieOptions = Object.values(FAMILIEN).map(familie =>{
+        return(
+            <option
+                key={familie}
+                value={familie}
+            >{familie}</option>
+        )
+    })
+
     let canSave
     if (password) {
-        canSave = [roles.length, validUsername, validPassword].every(Boolean) && !isLoading
+        canSave = [roles.length, validUsername, validPassword, familie].every(Boolean) && !isLoading
     } else {
-        canSave = [roles.length, validUsername].every(Boolean) && !isLoading
+        canSave = [roles.length, validUsername, familie].every(Boolean) && !isLoading
     }
 
     const errClass = (isError || isDelError) ? "errmsg" : "offscreen"
@@ -171,6 +184,18 @@ const EditUserForm = ({ user }) => {
                     onChange={onRolesChanged}
                 >
                     {options}
+                </select>
+
+                <label className="" htmlFor="familien">
+                    FAMILIEN:
+                </label>
+                <select
+                    id="familien"
+                    name="familien"
+                    value={familie}
+                    onChange={onFamilieChanged}
+                >
+                    {familieOptions}
                 </select>
 
             </form>
