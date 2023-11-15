@@ -34,7 +34,7 @@ const AusgabenList = () => {
             filteredExpenseValue = filteredIds.map(IDforVal => entities[IDforVal].valueAusgaben)
         }else{
             filteredIds = ids.filter(ausgabenId => entities[ausgabenId].username === username)
-            filteredExpenseValue = [filteredIds.map(IDforVal => entities[IDforVal].valueAusgaben)]
+            filteredExpenseValue = filteredIds.map(IDforVal => entities[IDforVal].valueAusgaben)
         }
 
         const tableContent = ids?.length && filteredIds.map(ausgabenId => <Ausgaben key={ausgabenId} ausgabeId={ausgabenId} />)

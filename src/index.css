@@ -23,7 +23,8 @@
 
 
 body{
-    font-family: 'Didact Gothic', sans-serif;;
+    font-family: 'Didact Gothic', sans-serif;
+    font-size: small;
     min-height: 100vh;
     background-color: #383166;
     background: linear-gradient(90deg, #8c88e3, #383166);
@@ -45,7 +46,7 @@ header, main, footer{
     flex-flow: column;
 }
 
-
+.public,
 .welcome {
     display: flex;
     min-height: 100vh;
@@ -58,8 +59,6 @@ header, main, footer{
 }
 
 .public{
-    display: flex;
-    min-height: 100vh;
     background-image: url('./img/background_public.jpg');
     background-size: cover;
     background-position: top right;
@@ -81,23 +80,17 @@ header, main, footer{
     flex-wrap: wrap;
     align-items: center;
     background: linear-gradient(10deg, #1b1939df, #201a48);;
-    width: 75vw;
-    height: 50vh;
+    box-shadow: 1px 20px 30px rgba(0,0,0,.5);
+    border-radius: 30px;
 
-}
-
-.public_box > div{
-    width:100%;
-    padding:1rem;
-    height: 50%;
-    
 
 }
 
 .public_box_container{
-    justify-content: center;
-    border-left: 5px solid #FFF;
-    border-right: 5px solid #FFF;
+   display: flex;
+   flex-flow: column;
+   align-items: center;
+   justify-content: center;
 }
 
 header {
@@ -272,6 +265,20 @@ footer {
 }
 
 @media screen and (max-width: 680px) {
+
+    .public_box{
+        height: 20%;
+    }
+
+    .public_box_container{
+        width: 100%;
+        border-bottom: 2px solid #FFF;
+    }
+
+    .public_box_container:last-child{
+        border-bottom: 0px;
+
+    }
     
     .dash-container-dipers{
         background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(16, 4, 4, 0.9)), url('./img/background_dipers.jpg');
@@ -322,6 +329,22 @@ footer {
 }
 
 @media screen and (min-width: 680px) {
+    body{
+        font-size: 16px;
+    }
+
+    .public_box_container{
+        width:calc(100% / 3);
+        height: 30vh;
+        border-right: 5px solid #FFF;
+    }
+    
+    .public_box_container:last-child{
+        border-right: 0px;
+
+    }
+    
+
     td,
     th{
         max-width: 20rem;
@@ -336,7 +359,4 @@ footer {
         margin: auto;
     }
 
-    .public_box > div {
-        width:calc(100% / 3);
-    }
 }
