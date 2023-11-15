@@ -3,7 +3,45 @@ import { NavLink } from "react-router-dom";
 const Public = () => {
     const content = (
         <section className="public">
-            <header className="public__header">
+            <main>
+                <div className="public_container">
+                    <div className = "public_box">
+                        <div className="public_box_container">
+                            <h1>Um Ausgaben zu erfassen, melden Sie sich an</h1>
+                            <p>Wo es nicht an Windeln mangelt und es viel Gelächter gibt</p></div>
+                        <div className="public_box_container">
+                        <h1>Herzlich Wilkommen bei den <span className="nowrap">Ilamo Guthnick - Familieausgaben</span></h1>
+                        </div>
+                        <div className="public_box_container">
+                            <h2><NavLink to="/login" className="Link__class">Employee Login</NavLink></h2>
+
+                            <div className="public__main_bottom">
+                                <address className="public__addr">
+                                    Employee of the year: Alejandro<br />
+                                    <a href="https://www.youtube.com/watch?v=ZhXL9YNVA_4" className="Link__class">Don't click here</a>
+                                </address>
+                                <br />
+                                <p>Owner: The familie</p>
+                            </div>
+                        </div>
+                        
+
+                        
+                
+                    </div>
+                </div>
+                
+            </main>
+        </section>
+    )
+
+    return content
+}
+
+export default Public
+
+/*
+<header className="public__header">
                 <h1>Herzlich Wilkommen bei den <span className="nowrap">Ilamo Guthnick - Familieausgaben</span></h1>
             </header>
             <main>
@@ -28,10 +66,4 @@ const Public = () => {
             <footer>
                 <h1 className="public-footer">Sicher is sicher</h1>
             </footer>
-        </section>
-    )
-
-    return content
-}
-
-export default Public
+*/
