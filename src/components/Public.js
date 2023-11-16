@@ -9,7 +9,7 @@ const Public = () => {
                         <div className="public_box_container">
                             <h1>Um Ausgaben zu erfassen, melden Sie sich an</h1>
                             <p>Wo es nicht an Windeln mangelt und es viel Gelächter gibt</p></div>
-                        <div className="public_box_container">
+                        <div className="public_box_container title_name">
                         <h1>Herzlich Wilkommen bei den <span className="nowrap">Ilamo Guthnick - Familieausgaben</span></h1>
                         </div>
                         <div className="public_box_container">
