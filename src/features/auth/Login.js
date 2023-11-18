@@ -1,6 +1,11 @@
 import { useRef, useState, useEffect } from "react"
 import { useNavigate, Link } from 'react-router-dom'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faUser,
+    faLock,
+    faChevronRight
+} from "@fortawesome/free-solid-svg-icons"
+import { faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import { useDispatch } from 'react-redux'
 import { setCredentials } from "./authSlice"
 import { useLoginMutation } from "./authApiSlice"
@@ -63,51 +68,73 @@ const Login = () => {
     const content = (
         <section className="public">
             <header>
-                <h1>Employee Login</h1>
+                <h1>Familie Nutzer</h1>
             </header>
 
-            <main className="login">
-                <p ref={errRef} className={errClass} aria-live="assertive">{errMsg}</p>
+            <main className="main_container">
+                <div className="login_screen">
+                    <div className="login_screen_content">
+                        <p ref={errRef} className={errClass} aria-live="assertive">{errMsg}</p>
 
-                <form className="form" onSubmit={handleSubmit}>
-                    <label htmlFor="username">Username:</label>
-                    <input
-                        className="form__input"
-                        type="text"
-                        id="username"
-                        ref={userRef}
-                        value={username}
-                        onChange={handleUserInput}
-                        autoComplete="off"
-                        required
-                    />
+                        <form className="login__form" onSubmit={handleSubmit}>
+                            <div className="login__field">
+                                <FontAwesomeIcon className="login__icon" icon={faUser} />
+                                <input
+                                className="login__input"
+                                type="text"
+                                id="username"
+                                ref={userRef}
+                                value={username}
+                                onChange={handleUserInput}
+                                placeholder="Nutzer / Email"
+                                autoComplete="off"
+                                required
+                            />
+                            </div>
+                                
+                            <div className="login__field">
+                                <FontAwesomeIcon className="login__icon" icon={faLock} />
+                                    <input
+                                        className="login__input"
+                                        type="password"
+                                        id="password"
+                                        onChange={handlePwdInput}
+                                        value={password}
+                                        placeholder="PassWort"
+                                        required
+                                    />
+                            </div>
+                            <button className="login__submit">Anmelden
+                            <FontAwesomeIcon className="" icon={faChevronRight} />
+                            </button>
 
-                    <label htmlFor="password">Password:</label>
-                    <input
-                        className="form__input"
-                        type="password"
-                        id="password"
-                        onChange={handlePwdInput}
-                        value={password}
-                        required
-                    />
-                    <button className="form__submit-button">Sign In</button>
+                            
+                            <label htmlFor="persist" className="persist__icon">
+                                <input
+                                    type="checkbox"
+                                    id="persist"
+                                    onChange={handleToggle}
+                                    checked={persist}
+                                />
+                                Trust This Device
+                            </label>
+                        </form>
 
-                    <label htmlFor="persist" className="form__persist">
-                        <input
-                            type="checkbox"
-                            className="form_checkbox"
-                            id="persist"
-                            onChange={handleToggle}
-                            checked={persist}
-                        />
-                        Trust This Device
-                    </label>
-                </form>
+                        <div>
+                            <a href="https://www.linkedin.com/in/julian-alejandro-ilamo-sarria-0a2890200/" className="login__instagram" target="_blank"><FontAwesomeIcon className="instagram_icon" icon={faLinkedin} /></a>
+                        </div>   	
+                    </div>
+                    <div class="screen__background">
+                            <span class="screen__background__shape screen__background__shape4"></span>
+                            <span class="screen__background__shape screen__background__shape3"></span>		
+                            <span class="screen__background__shape screen__background__shape2"></span>
+                            <span class="screen__background__shape screen__background__shape1"></span>
+                        </div>	
+                </div>
             </main>
 
             <footer>
-                <Link to="/">Back to Home</Link>
+                <Link to="/" className="Link__class">Zurück zur Hauptseite</Link>
             </footer>
         </section>
     )
