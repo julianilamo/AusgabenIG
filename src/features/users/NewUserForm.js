@@ -22,7 +22,7 @@ const NewUserForm = () =>{
     const [validUsername, setvalidUsername] = useState(false)
     const [password, setPassword] = useState('')
     const [validPassword, setValidPassword] = useState(false)
-    const [familie, setFamilie] = useState('Ilamo Guthnick')
+    const [familie, setFamilie] = useState('Select')
     const [roles, setRoles] = useState(["Employee"])
 
     useEffect(()=>{
@@ -38,7 +38,7 @@ const NewUserForm = () =>{
             setUsername('')
             setPassword('')
             setRoles([])
-            setFamilie('')
+            setFamilie('Select')
             navigate('/dash/users')
         }
     }, [isSuccess, navigate])

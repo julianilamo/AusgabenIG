@@ -41,7 +41,7 @@ const AusgabenList = () => {
         const TotalAusgaben = filteredExpenseValue.reduce((a, b) => a + b, 0).toFixed(2)
 
         content = (
-            <div className="table__container dash-dipers">
+            <div className="table__container">
                 <table className="ausg_table">
                     <thead className="">
                         <tr>
