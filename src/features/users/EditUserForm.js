@@ -30,7 +30,7 @@ const EditUserForm = ({ user }) => {
     const [validUsername, setvalidUsername] = useState(false)
     const [password, setPassword] = useState('')
     const [validPassword, setValidPassword] = useState(false)
-    const [familie, setFamilie] = useState('Ilamo Guthnick')
+    const [familie, setFamilie] = useState('Select')
     const [roles, setRoles] = useState(user.roles)
     const [active, setActive] = useState(user.active)
     
@@ -46,7 +46,7 @@ const EditUserForm = ({ user }) => {
         if(isSuccess || isDelSuccess){
             setUsername('')
             setPassword('')
-            setFamilie('')
+            setFamilie('Select')
             setRoles([])
             navigate('/dash/users')
         }

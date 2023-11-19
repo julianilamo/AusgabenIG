@@ -13,7 +13,7 @@ const Welcome = () => {
             <div className="welcome__menu">
                 <p>{today}</p>
 
-                <h1>Wilkommen <span className="user__span">{username}</span> Benutzer! </h1>
+                <h1>Wilkommen <span className="user__span">{username}</span> ! </h1>
 
                 <h2>Wir lieben Mateo so sehr</h2>
                 <h2>Und Alejandro Liebe Sarah so so sehr auch</h2>

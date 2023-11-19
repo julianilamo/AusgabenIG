@@ -105,7 +105,7 @@ const Login = () => {
                                     />
                             </div>
                             <button className="login__submit">Anmelden
-                            <FontAwesomeIcon className="" icon={faChevronRight} />
+                            <FontAwesomeIcon className="button__icon" icon={faChevronRight} />
                             </button>
 
                             
@@ -116,7 +116,7 @@ const Login = () => {
                                     onChange={handleToggle}
                                     checked={persist}
                                 />
-                                Trust This Device
+                                Vertrauen Sie diesem Gerät
                             </label>
                         </form>
 

@@ -50,7 +50,7 @@ header, main, footer{
 .public,
 .welcome {
     display: flex;
-    min-height: 100vh;
+    min-height: 50vh;
     flex-direction: column;
     gap: 1rem;
 }
@@ -60,6 +60,7 @@ header, main, footer{
 }
 
 .public{
+    min-height: 100vh;
     background-image: url('./img/background_public.jpg');
     background-size: cover;
     background-position: top right;
@@ -124,7 +125,7 @@ main {
 
 
 .login_screen{
-    background: linear-gradient(90deg, var(--MAIN-COLOR), #7C78B8);		
+    background: linear-gradient(90deg, var(--MAIN-COLOR), #47437f);		
 	position: relative;	
 	height: 500px;
 	width: 360px;
@@ -192,7 +193,7 @@ main {
 .button__icon {
 	font-size: 24px;
 	margin-left: auto;
-	color: #fff;
+	color: var(--MAIN-COLOR);
 }
 
 .button__icon:hover {
@@ -202,8 +203,9 @@ main {
 .persist__icon{
     display: flex;
     justify-content: right;
-    padding: 1rem 0rem;
-    color: #FFF
+    padding: 1.5rem 0rem;
+    color: #FFF;
+    font-size: 14px;
 }
 
 
@@ -211,7 +213,7 @@ main {
 .login__instagram{
     display: flex;
     justify-content: flex-end;
-    padding: 2rem 4.4rem;
+    padding: 1rem 4.4rem;
     color: #fff;
     text-decoration: none;	
     text-shadow: 0px 0px 8px #7875B5;
@@ -329,6 +331,14 @@ footer {
     flex-grow: 1;
 }
 
+.dash-container-public{
+    background: linear-gradient( #383166, #4C489D);
+    background-size: contain;
+    background-position: 50% 0;
+    padding: 0.75em 0.5em 0.5em;
+    flex-grow: 1;
+}
+
 .dash-footer{
     padding: 0.35rem;
     position: sticky;
@@ -337,7 +347,7 @@ footer {
 
 
 .user__span{
-    font-size: 28px;
+    font-size: 25px;
     font-weight: bold;
 }
 
