@@ -1,13 +1,14 @@
 import NewAusgabeForm from "./NewAusgabeForm"
 import { useGetUsersQuery } from "../users/usersApiSlice"
 import PulseLoader from 'react-spinners/PulseLoader'
+import useAuth from "../../hooks/useAuth"
 
 const NewAusgabe = () => {
-    //const users = useSelector(selectAllUsers)
-
-    const { users } = useGetUsersQuery("usersList", {
+    const { familie } = useAuth()
+    const { users, idsFilter } = useGetUsersQuery("usersList", {
         selectFromResult: ({ data }) => ({
-            users: data?.ids.map(id => data?.entities[id])
+            //users: data?.ids.map(id => data?.entities[id])
+            users: data?.ids.filter(ids => data?.entities[ids].familie === familie).map(id => data?.entities[id])
         }),
     })
 

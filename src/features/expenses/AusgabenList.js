@@ -3,7 +3,7 @@ import Ausgaben from "./Ausgaben"
 import useAuth from "../../hooks/useAuth"
 
 const AusgabenList = () => {
-    const { username, isManager, isAdmin} = useAuth()
+    const { username, isManager, isAdmin, familie} = useAuth()
 
     const {
         data: ausgaben,
@@ -30,10 +30,11 @@ const AusgabenList = () => {
         let filteredIds
         let filteredExpenseValue
         if (isManager || isAdmin) {
-            filteredIds = [...ids]
+            //filteredIds = [...ids]
+            filteredIds = ids.filter(ausgabenId => entities[ausgabenId].familie === familie)
             filteredExpenseValue = filteredIds.map(IDforVal => entities[IDforVal].valueAusgaben)
         }else{
-            filteredIds = ids.filter(ausgabenId => entities[ausgabenId].username === username)
+            filteredIds = ids.filter(ausgabenId => entities[ausgabenId].familie === familie)
             filteredExpenseValue = filteredIds.map(IDforVal => entities[IDforVal].valueAusgaben)
         }
 
@@ -57,11 +58,8 @@ const AusgabenList = () => {
                         {tableContent}
                         <tr>
                             <td className="table__cell" data-cell="spesenname">TOTAL</td>
-                            <td className="table__cell" data-cell="kostenwert">{TotalAusgaben}</td>
-                            <td className="table__cell" data-cell="beschreibung"></td>
-                            <td className="table__cell" data-cell="kaufdatum"></td>
-                            <td className="table__cell" data-cell="nutzer"></td>
-                            <td className="table__cell" data-cell="bearbeiten"></td>
+                            <td className="table__cell" data-cell="kostenwert">€{TotalAusgaben}</td>
+                            
                          </tr>
                     </tbody>
                 </table>

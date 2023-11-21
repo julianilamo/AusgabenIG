@@ -30,7 +30,7 @@ const EditUserForm = ({ user }) => {
     const [validUsername, setvalidUsername] = useState(false)
     const [password, setPassword] = useState('')
     const [validPassword, setValidPassword] = useState(false)
-    const [familie, setFamilie] = useState('Select')
+    const [familie, setFamilie] = useState(user.familie)
     const [roles, setRoles] = useState(user.roles)
     const [active, setActive] = useState(user.active)
     
