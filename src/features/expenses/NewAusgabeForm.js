@@ -109,7 +109,8 @@ const NewAusgabeForm = ({users})=>{
     })
 
     const errClass = isError ? "errmsg" : "offscreen"
-    const displayConvertion = fromCurrency === "EUR" ? "displayingComponent" : ""
+    const displayConvertion = fromCurrency === "EUR" ? "displayingComponent" : "form__convertion"
+    const displayButton = canSave === true ? "icon__container" : "displayingComponent"
     
 
     const content = (
@@ -119,7 +120,7 @@ const NewAusgabeForm = ({users})=>{
             <form className="form" onSubmit={onSaveAusgabenClicked}>
                 <div className="form__title-row">
                     <h2>New Ausgaben</h2>
-                    <div className="form__action-buttons">
+                    <div className={displayButton}>
                         <button
                             className="icon-button"
                             title="Save"
@@ -130,7 +131,7 @@ const NewAusgabeForm = ({users})=>{
                         </button>
                     </div>
                 </div>
-
+            
                 <label className="form__label" htmlFor="expenseName">
                 Spesenname:</label>
                 <input
@@ -143,38 +144,43 @@ const NewAusgabeForm = ({users})=>{
                     onChange={onExpenseChanged}
                 />
 
+
                 <label className="form__label" htmlFor="valAusgaben">
                     Kostenwert</label>
-                <input className="input__valAusgaben"
-                    type="number"
-                    id="valAusgaben" 
-                    name="valAusgaben"
-                    min="0"
-                    max="100000000000000000000000"
-                    value={valueAusgaben}
-                    onChange={onValueAusgabenChanged}
-                />
-
-                <CurrencyRow 
-                    currencyOptions={currencyOptions}
-                    selectedCurrency={fromCurrency}
-                    const onChangeCurrency = {e => (
-                        setFromCurrency(e.target.value))
-                    }
-                
+                <div className="form__convertion">
                     
-                />
-                
-                <div className={displayConvertion}>
-                    <label className="form__label" htmlFor="ConvertionAusgaben">in Euro</label>
                     <input className="input__valAusgaben"
                         type="number"
-                        id="ConvertionAusgaben"
-                        name="ConvertionAusgaben"
-                        value={valConvAusg}
-                        readOnly
+                        id="valAusgaben" 
+                        name="valAusgaben"
+                        min="0"
+                        max="100000000000000000000000"
+                        value={valueAusgaben}
+                        onChange={onValueAusgabenChanged}
                     />
+
+                    <CurrencyRow 
+                        currencyOptions={currencyOptions}
+                        selectedCurrency={fromCurrency}
+                        const onChangeCurrency = {e => (
+                            setFromCurrency(e.target.value))
+                        }
+                    
+                        
+                    />
+                    
+                    <div className={displayConvertion}>
+                        <label className="form__label" htmlFor="ConvertionAusgaben">in Euro</label>
+                        <input className="input__valAusgaben"
+                            type="number"
+                            id="ConvertionAusgaben"
+                            name="ConvertionAusgaben"
+                            value={valConvAusg}
+                            readOnly
+                        />
+                    </div>
                 </div>
+                
 
                 <label className="form__label" htmlFor="textAusgaben">
                     Beschreibung:</label>
@@ -192,6 +198,7 @@ const NewAusgabeForm = ({users})=>{
                     type="date"
                     id="boughtAusgaben"
                     name="boughtAusgaben"
+                    className="form__date"
                     min="2023-11-01" 
                     max={maxDate}
                     value={boughtDate}

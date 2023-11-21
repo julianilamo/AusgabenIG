@@ -109,7 +109,8 @@ const EditAusgabenForm = ({ausgabe, users}) =>{
     })
 
     const errClass = (isError|| isDelError) ? "errmsg" : "displayingComponent"
-    const displayConvertion = fromCurrency === "EUR" ? "displayingComponent" : ""
+    const displayConvertion = fromCurrency === "EUR" ? "displayingComponent" : "form__convertion"
+    const displayButton = canSave === true ? "icon__container" : "displayingComponent"
 
     let deleteButton = null
     if (isManager || isAdmin){
@@ -131,7 +132,7 @@ const EditAusgabenForm = ({ausgabe, users}) =>{
             <form className="form" onSubmit={e => e.preventDefault()}>
                 <div className="form__title-row">
                     <h2>Edit Ausgaben</h2>
-                    <div className="form__action-buttons">
+                    <div className={displayButton}>
                         <button
                             className="icon-button"
                             title="Save"
@@ -157,37 +158,42 @@ const EditAusgabenForm = ({ausgabe, users}) =>{
                     onChange={onExpenseChanged}
                 />
 
+                
                 <label className="form__label" htmlFor="valAusgaben">
-                    Kostenwert</label>
-                <input className="input__valAusgaben"
-                    type="number"
-                    id="valAusgaben" 
-                    name="valAusgaben"
-                    min="0"
-                    max="100000000000000000000000"
-                    value={valueAusgaben}
-                    onChange={onValueAusgabenChanged}
-                />
+                        Kostenwert</label>
 
-                <CurrencyRow 
-                    currencyOptions={currencyOptions}
-                    selectedCurrency={fromCurrency}
-                    const onChangeCurrency = {e => (
-                        setFromCurrency(e.target.value))
-                    }
-                
-                    
-                />
-                
-                <div className={displayConvertion}>
-                    <label className="form__label" htmlFor="ConvertionAusgaben">in Euro</label>
+                <div className="form__convertion">
                     <input className="input__valAusgaben"
                         type="number"
-                        id="ConvertionAusgaben"
-                        name="ConvertionAusgaben"
-                        value={valConvAusg}
-                        readOnly
+                        id="valAusgaben" 
+                        name="valAusgaben"
+                        min="0"
+                        max="100000000000000000000000"
+                        value={valueAusgaben}
+                        onChange={onValueAusgabenChanged}
                     />
+
+                    <CurrencyRow 
+                        currencyOptions={currencyOptions}
+                        selectedCurrency={fromCurrency}
+                        const onChangeCurrency = {e => (
+                            setFromCurrency(e.target.value))
+                        }
+                    
+                        
+                    />
+                    
+                    <div className={displayConvertion}>
+                        <label className="form__label" htmlFor="ConvertionAusgaben">in Euro</label>
+                        <input className="input__valAusgaben"
+                            type="number"
+                            id="ConvertionAusgaben"
+                            name="ConvertionAusgaben"
+                            value={valConvAusg}
+                            readOnly
+                        />
+                    </div>
+
                 </div>
 
                 <label className="form__label" htmlFor="textAusgaben">
@@ -206,6 +212,7 @@ const EditAusgabenForm = ({ausgabe, users}) =>{
                     type="date"
                     id="boughtAusgaben"
                     name="boughtAusgaben"
+                    className="form__date"
                     min="2023-11-01" 
                     max={maxDate}
                     value={boughtDate}

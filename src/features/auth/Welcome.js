@@ -6,7 +6,7 @@ const Welcome = () => {
     const { username, isManager, isAdmin } = useAuth()
 
     const date = new Date()
-    const today = new Intl.DateTimeFormat('en-US', { dateStyle: 'full', timeStyle: 'long'}).format(date)
+    const today = new Intl.DateTimeFormat('de', { dateStyle: 'full', timeStyle: 'long'}).format(date)
 
     const content = (
         <section className="welcome">
@@ -14,15 +14,19 @@ const Welcome = () => {
                 <p>{today}</p>
 
                 <h1>Wilkommen <span className="user__span">{username}</span> ! </h1>
+                <h3>Wir lieben Mateo so sehr</h3>
+                <h3>Und Alejandro Liebe Sarah so so sehr auch</h3>
+                <h3>Hier sind einige Optionen für Ihre Ausgaben</h3>
+                <div className="welcome__options_container">
+                    <p className="option__button"><Link to="/dash/ausgaben" className="Link__class">Ausgaben anzeigen</Link></p>
+                    <p className="option__button"><Link to="/dash/ausgaben/new" className="Link__class">Neue Ausgaben schaffen</Link></p>
 
-                <h2>Wir lieben Mateo so sehr</h2>
-                <h2>Und Alejandro Liebe Sarah so so sehr auch</h2>
+                    {(isManager|| isAdmin) && <p className="option__button"><Link to="/dash/users" className="Link__class">View User Settings</Link></p>}
+                    {(isManager|| isAdmin) && <p className="option__button"><Link to="/dash/users/new" className="Link__class">Add New User</Link></p>}
+                </div>
+                
 
-                <p><Link to="/dash/ausgaben" className="Link__class">View Ausgaben</Link></p>
-                <p><Link to="/dash/ausgaben/new" className="Link__class">Create new Ausgaben</Link></p>
-
-                {(isManager|| isAdmin) && <p><Link to="/dash/users" className="Link__class">View User Settings</Link></p>}
-                {(isManager|| isAdmin) && <p><Link to="/dash/users/new" className="Link__class">Add New User</Link></p>}
+                
 
             </div>
 

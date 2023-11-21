@@ -30,7 +30,11 @@ const Ausgabe = ({ ausgabeId }) => {
                 <tr>
                     <td className="table__cell" data-cell="spesenname">{ausgabe.expenseName}</td>
                     <td className="table__cell" data-cell="kostenwert">€{value}</td>
-                    <td className="table__cell" data-cell="beschreibung">{ausgabe.textAusgaben}</td>
+                    <td className="table__cell" data-cell="beschreibung">
+                        <div className='row__text_line'>
+                         {ausgabe.textAusgaben}
+                        </div>
+                    </td>
                     <td className="table__cell" data-cell="kaufdatum">{boughtDateAusg}</td>
                     <td className="table__cell" data-cell="nutzer">{ausgabe.username}</td>
                     <td className="table__cell" data-cell="bearbeiten">

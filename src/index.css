@@ -26,7 +26,7 @@
 
 body{
     font-family: 'Didact Gothic', sans-serif;
-    font-size: small;
+    font-size: 18px;
     min-height: 100vh;
     background-color: var(--BACKGROUND-COLOR);
     background: linear-gradient(90deg, #8c88e3, #383166);
@@ -57,7 +57,36 @@ header, main, footer{
 
 .welcome{
     padding: 1rem;
+    align-items: center;
 }
+
+.welcome__menu{
+    display: flex;
+    flex-direction: column;
+    width: 70vw;
+    align-items: center;
+}
+
+.welcome__options_container{
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 25px;
+    text-align: center;
+    place-content: center;
+    align-items: center;
+    padding-top: 1rem;
+}
+
+.option__button{
+    display: flex;
+    width: 100%;
+    height: 3.5em;
+    border: 2px solid var(--BORDER-COLOR);
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+}
+
 
 .public{
     min-height: 100vh;
@@ -332,7 +361,7 @@ footer {
 }
 
 .dash-container-public{
-    background: linear-gradient( #383166, #4C489D);
+    background: linear-gradient(rgba(0, 0, 0, 0.762), rgba(16, 4, 4, 1)), url('./img/background_cash.jpg');
     background-size: contain;
     background-position: 50% 0;
     padding: 0.75em 0.5em 0.5em;
@@ -384,6 +413,24 @@ footer {
     padding: 0.5em;
 }
 
+.row__text_line{  
+    max-height: 2.6em;
+    overflow-y: auto;
+}
+
+.row__text_line::-webkit-scrollbar {
+    width: 0.5em;
+    background-color: transparent;
+}
+  
+.row__text_line::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 1em;
+}
+
+.row__text_line:hover::-webkit-scrollbar-thumb{    
+    background-color: var(--BORDER-COLOR);
+}
 
 
 .table__th{
@@ -399,7 +446,6 @@ footer {
 
 .table__cell:nth-child(3) {
     text-align: justify;
-    text-justify: inter-word;
 }
 
 .dash-header__nav{
@@ -416,9 +462,14 @@ footer {
     font-size: 1.3em;
     background-color: transparent;
     border: none;
+    margin: auto;
     color: var(--COLOR);
-    flex-grow: 1;
     display: block;
+}
+
+.icon-button:hover{
+    transform: scale(1.5);
+    cursor: pointer;
 }
 
 .dash-footer__button {
@@ -454,7 +505,6 @@ footer {
 }
 
 .input__valAusgaben{
-    padding: .25rem;
     width: 10em;
 }
 
@@ -468,6 +518,36 @@ footer {
 
 .instagram_icon{
     font-size: 24px;	
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+    gap: 0.3em;
+}
+
+.form__title-row{
+    display: flex;
+    justify-content: space-between;
+}
+
+.form__convertion{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.form__select{
+    width:max-content;
+}
+
+.form__date{
+    width:fit-content;
+}
+
+.icon__container{
+    text-align: center;
 }
 
 @media screen and (max-width: 680px) {
@@ -543,6 +623,8 @@ footer {
         text-transform: capitalize;
     }
 
+    
+
   
 }
 
@@ -562,6 +644,9 @@ footer {
 
     }
     
+    .option__button{
+        width: 50%;
+    }
 
     td,
     th{
@@ -573,8 +658,8 @@ footer {
         text-align: center;
     }
 
-    .icon-button{
-        margin: auto;
+    .form{
+        width: 37vw;
     }
 
 }

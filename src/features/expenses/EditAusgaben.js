@@ -9,7 +9,7 @@ import PulseLoader from 'react-spinners/PulseLoader'
 const EditAusgaben = () =>{
     const {id} = useParams()
 
-    const {username, isManager, isAdmin} = useAuth()
+    const {username, isManager, isAdmin, familie} = useAuth()
 
     const {ausgabe} = useGetAusgabenQuery("ausgabenList", {
         selectFromResult: ({data}) => ({
@@ -19,7 +19,7 @@ const EditAusgaben = () =>{
 
     const { users } = useGetUsersQuery("usersList", {
         selectFromResult: ({ data }) => ({
-            users: data?.ids.map(id => data?.entities[id])
+            users: data?.ids.filter(ids => data?.entities[ids].familie === familie).map(id => data?.entities[id])
         }),
     })
 
