@@ -346,7 +346,7 @@ footer {
 
 .dash-container {
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(16, 4, 4, 1)), url('./img/background_welcome.jpg');
-    background-size: cover;
+    background-size:cover;
     background-position: 50% 0;
     padding: 0.75em 0.5em 0.5em;
     flex-grow: 1;
@@ -487,6 +487,15 @@ footer {
 
 
 
+/* Filters Ausgaben List */
+.filters__ausgabenDisplay{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 3em 1em;
+    gap: 0.7em;
+}
+
+
 /* Forms*/
 
 .login__form{
@@ -544,6 +553,10 @@ footer {
 
 .form__date{
     width:fit-content;
+}
+
+.form__label{
+    padding-right: 1em;
 }
 
 .icon__container{

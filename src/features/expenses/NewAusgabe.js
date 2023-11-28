@@ -5,7 +5,7 @@ import useAuth from "../../hooks/useAuth"
 
 const NewAusgabe = () => {
     const { familie } = useAuth()
-    const { users, idsFilter } = useGetUsersQuery("usersList", {
+    const { users } = useGetUsersQuery("usersList", {
         selectFromResult: ({ data }) => ({
             //users: data?.ids.map(id => data?.entities[id])
             users: data?.ids.filter(ids => data?.entities[ids].familie === familie).map(id => data?.entities[id])
