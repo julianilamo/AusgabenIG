@@ -18,14 +18,10 @@ const Ausgabe = ({ ausgabeId }) => {
     
 
     if (ausgabe) {
-        //const created = new Date(ausgabe.createdAt).toLocaleString('en-US', { day: 'numeric', month: 'long' })
 
-        //const updated = new Date(ausgabe.updatedAt).toLocaleString('en-US', { day: 'numeric', month: 'long' })
         const handleEdit = () => navigate(`/dash/ausgaben/${ausgabeId}`)
         const boughtDateAusg = new Date(ausgabe.boughtDate).toLocaleString('DE', { day: 'numeric', month: 'long' })
         const value = (ausgabe.valueAusgaben).toFixed(2)
-       // const sumValues = obj => Object.values(obj).reduce((a, b) => a + b, 0);
-       // const totalValues = sumValues(value)
         return (
                 <tr>
                     <td className="table__cell" data-cell="spesenname">{ausgabe.expenseName}</td>
