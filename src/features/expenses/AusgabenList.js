@@ -153,6 +153,7 @@ const AusgabenList = () => {
                     </select>
 
                     <div>
+                        <label className="form__label" htmlFor="SpecificPurchase">Spezifische Einkäufe</label>
                         <input 
                             type="checkbox"
                             id="SpecificPurchase"
@@ -161,7 +162,7 @@ const AusgabenList = () => {
                             onChange={onFilterSpecificPurchaseChange}
                             className="form__label"
                             />
-                        <label htmlFor="SpecificPurchase">Spezifische Einkäufe</label>
+                        
                     </div>
                     
                 </div>
