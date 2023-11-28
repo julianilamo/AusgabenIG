@@ -556,14 +556,14 @@ footer {
 }
 
 .form__label{
-    padding-right: 1em;
+    padding-right: 0.5em;
 }
 
 .icon__container{
     text-align: center;
 }
 
-@media screen and (max-width: 680px) {
+@media screen and (max-width: 680px){
 
     .title_name{
         font-size: 21px;
@@ -644,6 +644,14 @@ footer {
 @media screen and (min-width: 680px) {
     body{
         font-size: 16px;
+    }
+
+    header{
+        height: auto;
+    }
+
+    footer{
+        height: auto;
     }
 
     .public_box_container{
