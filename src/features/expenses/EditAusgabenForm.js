@@ -113,7 +113,7 @@ const EditAusgabenForm = ({ausgabe, users}) =>{
     const displayButton = canSave === true ? "icon__container" : "displayingComponent"
 
     let deleteButton = null
-    if (isManager || isAdmin){
+    //if (isManager || isAdmin){
         deleteButton = (
             <button
                 className="icon-button"
@@ -123,7 +123,7 @@ const EditAusgabenForm = ({ausgabe, users}) =>{
                 <FontAwesomeIcon icon={faTrashCan} />
             </button>
         )
-    }
+    //}
 
     const content = (
         <>
