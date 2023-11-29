@@ -25,11 +25,14 @@ const EditAusgaben = () =>{
 
     if (!ausgabe || !users?.length) return <PulseLoader color={"#FFF"} />
 
+    /*
+    Es buena seguridad por si queremos editar el ausgaben de otro integrante de la familia
+
     if (!isManager || !isAdmin){
         if(ausgabe.username !== username){
             return <p className="errmsg">No access</p>
         }
-    }
+    }*/
 
     const content = <EditAusgabenForm ausgabe = {ausgabe} users = {users} />
 
