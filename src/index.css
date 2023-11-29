@@ -128,7 +128,7 @@ header, main, footer{
 
 header {
     top: 0;
-     height: 15vh;
+    height: 15vh;
 } 
 
 header, footer{
@@ -648,10 +648,12 @@ footer {
 
     header{
         height: auto;
+        min-height: 10vh;
     }
 
     footer{
         height: auto;
+        min-height: 10vh;
     }
 
     .public_box_container{

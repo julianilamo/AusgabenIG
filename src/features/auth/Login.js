@@ -124,11 +124,11 @@ const Login = () => {
                             <a href="https://www.linkedin.com/in/julian-alejandro-ilamo-sarria-0a2890200/" className="login__instagram" target="_blank"><FontAwesomeIcon className="instagram_icon" icon={faLinkedin} /></a>
                         </div>   	
                     </div>
-                    <div class="screen__background">
-                            <span class="screen__background__shape screen__background__shape4"></span>
-                            <span class="screen__background__shape screen__background__shape3"></span>		
-                            <span class="screen__background__shape screen__background__shape2"></span>
-                            <span class="screen__background__shape screen__background__shape1"></span>
+                    <div className="screen__background">
+                            <span className="screen__background__shape screen__background__shape4"></span>
+                            <span className="screen__background__shape screen__background__shape3"></span>		
+                            <span className="screen__background__shape screen__background__shape2"></span>
+                            <span className="screen__background__shape screen__background__shape1"></span>
                         </div>	
                 </div>
             </main>
