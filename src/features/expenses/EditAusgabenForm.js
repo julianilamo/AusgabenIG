@@ -3,7 +3,7 @@ import { useUpdateAusgabenMutation, useDeleteAusgabenMutation } from "./ausgaben
 import { useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave, faTrashCan } from "@fortawesome/free-solid-svg-icons"
-import currencyRow from "./CurrencyRow"
+import CurrencyRow from "./CurrencyRow"
 import useAuth from "../../hooks/useAuth"
 
 const EditAusgabenForm = ({ausgabe, users}) =>{
@@ -173,7 +173,7 @@ const EditAusgabenForm = ({ausgabe, users}) =>{
                         onChange={onValueAusgabenChanged}
                     />
 
-                    <currencyRow 
+                    <CurrencyRow 
                         currencyOptions={currencyOptions}
                         selectedCurrency={fromCurrency}
                         const onChangeCurrency = {e => (
