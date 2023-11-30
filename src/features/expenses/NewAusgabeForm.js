@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import { useAddNewAusgabenMutation } from "./ausgabenApiSlice"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave } from "@fortawesome/free-solid-svg-icons"
-import currencyRow from "./CurrencyRow"
+import CurrencyRow from "./CurrencyRow"
 
 const NewAusgabeForm = ({users})=>{
     const [addNewAusgabe, {
@@ -159,7 +159,7 @@ const NewAusgabeForm = ({users})=>{
                         onChange={onValueAusgabenChanged}
                     />
 
-                    <currencyRow 
+                    <CurrencyRow
                         currencyOptions={currencyOptions}
                         selectedCurrency={fromCurrency}
                         const onChangeCurrency = {e => (
