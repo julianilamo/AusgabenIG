@@ -110,7 +110,7 @@ const NewAusgabeForm = ({users})=>{
 
     const errClass = isError ? "errmsg" : "offscreen"
     const displayConvertion = fromCurrency === "EUR" ? "displayingComponent" : "form__convertion"
-    const displayButton = canSave === true ? "icon__container" : "displayingComponent"
+    const displayButton = canSave === true ? "icon__container" : ""
     
 
     const content = (
@@ -124,7 +124,7 @@ const NewAusgabeForm = ({users})=>{
                         <button
                             className="icon-button"
                             title="Save"
-                            disabled={!canSave}
+                            
                             
                         >
                             <FontAwesomeIcon icon={faSave} />          
@@ -132,7 +132,7 @@ const NewAusgabeForm = ({users})=>{
                     </div>
                 </div>
             
-                <label className="form__label" htmlFor="expenseName">
+                <label className="form__label required" htmlFor="expenseName">
                 Spesenname:</label>
                 <input
                     className={`form__input`}
@@ -142,10 +142,11 @@ const NewAusgabeForm = ({users})=>{
                     autoComplete="on"
                     value={expense}
                     onChange={onExpenseChanged}
+                    required
                 />
 
 
-                <label className="form__label" htmlFor="valAusgaben">
+                <label className="form__label required" htmlFor="valAusgaben">
                     Kostenwert</label>
                 <div className="form__convertion">
                     
@@ -155,8 +156,10 @@ const NewAusgabeForm = ({users})=>{
                         name="valAusgaben"
                         min="0"
                         max="100000000000000000000000"
+                        step="0.01"
                         value={valueAusgaben}
                         onChange={onValueAusgabenChanged}
+                        required
                     />
 
                     <CurrencyRow
@@ -209,7 +212,7 @@ const NewAusgabeForm = ({users})=>{
                 
 
                 <label className="form__label form__checkbox-container" htmlFor="username">
-                gekauft von:</label>
+                Gekauft von:</label>
                 <select
                     id="username"
                     name="username"

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import useAuth from "../../hooks/useAuth"
 
@@ -5,13 +6,23 @@ const Welcome = () => {
 
     const { username, isManager, isAdmin } = useAuth()
 
-    const date = new Date()
-    const today = new Intl.DateTimeFormat('de', { dateStyle: 'full', timeStyle: 'long'}).format(date)
+    //const date = new Date()
+    //const today = new Intl.DateTimeFormat('de', { dateStyle: 'full', timeStyle: 'long'}).format(date)
+
+    const [dateToday, setDateToday] = useState(new Intl.DateTimeFormat('de', { dateStyle: 'full', timeStyle: 'long'}).format(new Date()))
+
+    useEffect(()=>{
+        const interval = setInterval(() => {
+            setDateToday(new Intl.DateTimeFormat('de', { dateStyle: 'full', timeStyle: 'long'}).format(new Date()))
+          }, 60000)
+      
+          return () => clearInterval(interval)
+    }, [])
 
     const content = (
         <section className="welcome">
             <div className="welcome__menu">
-                <p>{today}</p>
+                <p>{dateToday}</p>
 
                 <h1>Wilkommen <span className="user__span">{username}</span> ! </h1>
                 <h3>Wir lieben Mateo so sehr</h3>

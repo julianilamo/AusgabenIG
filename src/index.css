@@ -563,6 +563,11 @@ footer {
     text-align: center;
 }
 
+.required:after {
+    content:" *";
+    color: whitesmoke;
+  }
+
 @media screen and (max-width: 680px){
 
     .title_name{

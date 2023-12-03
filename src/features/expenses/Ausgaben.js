@@ -20,8 +20,9 @@ const Ausgabe = ({ ausgabeId }) => {
     if (ausgabe) {
 
         const handleEdit = () => navigate(`/dash/ausgaben/${ausgabeId}`)
-        const boughtDateAusg = new Date(ausgabe.boughtDate).toLocaleString('DE', { day: 'numeric', month: 'long' })
+        const boughtDateAusg = new Date(new Date(ausgabe.boughtDate).toISOString().split('T')[0].replace(/-/g, '\/')).toLocaleString('DE', { day: 'numeric', month: 'long' })
         const value = (ausgabe.valueAusgaben).toFixed(2)
+        console.log()
         return (
                 <tr>
                     <td className="table__cell" data-cell="spesenname">{ausgabe.expenseName}</td>

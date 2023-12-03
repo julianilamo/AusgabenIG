@@ -29,7 +29,7 @@ const EditAusgabenForm = ({ausgabe, users}) =>{
     const baseForAusg = "EUR"
 
     const [expense, setExpense] = useState(ausgabe.expenseName)
-    const [valueAusgaben, setValueAusgaben] = useState(ausgabe.valueAusgaben)
+    const [valueAusgaben, setValueAusgaben] = useState(ausgabe.valueAusgaben.toFixed(2))
     const [textAusgaben, setTextAusgaben] = useState(ausgabe.textAusgaben)
     const [boughtDate, setBoughtDate] = useState(new Date(ausgabe.boughtDate).toISOString().split('T')[0])    
     const [userId, setUserId] = useState(ausgabe.userAusgaben)
@@ -110,7 +110,7 @@ const EditAusgabenForm = ({ausgabe, users}) =>{
 
     const errClass = (isError|| isDelError) ? "errmsg" : "displayingComponent"
     const displayConvertion = fromCurrency === "EUR" ? "displayingComponent" : "form__convertion"
-    const displayButton = canSave === true ? "icon__container" : "displayingComponent"
+    const displayButton = canSave === true ? "icon__container" : ""
 
     let deleteButton = null
     //if (isManager || isAdmin){
@@ -137,7 +137,6 @@ const EditAusgabenForm = ({ausgabe, users}) =>{
                             className="icon-button"
                             title="Save"
                             onClick={onSaveAusgabenClicked}
-                            disabled={!canSave}
                             
                         >
                             <FontAwesomeIcon icon={faSave} />          
@@ -146,7 +145,7 @@ const EditAusgabenForm = ({ausgabe, users}) =>{
                     </div>
                 </div>
 
-                <label className="form__label" htmlFor="expenseName">
+                <label className="form__label required" htmlFor="expenseName">
                 Spesenname:</label>
                 <input
                     className={`form__input`}
@@ -156,10 +155,11 @@ const EditAusgabenForm = ({ausgabe, users}) =>{
                     autoComplete="on"
                     value={expense}
                     onChange={onExpenseChanged}
+                    required
                 />
 
                 
-                <label className="form__label" htmlFor="valAusgaben">
+                <label className="form__label required" htmlFor="valAusgaben">
                         Kostenwert</label>
 
                 <div className="form__convertion">
@@ -169,8 +169,10 @@ const EditAusgabenForm = ({ausgabe, users}) =>{
                         name="valAusgaben"
                         min="0"
                         max="100000000000000000000000"
+                        step="0.01"
                         value={valueAusgaben}
                         onChange={onValueAusgabenChanged}
+                        required
                     />
 
                     <CurrencyRow 
@@ -223,7 +225,7 @@ const EditAusgabenForm = ({ausgabe, users}) =>{
                 
 
                 <label className="form__label form__checkbox-container" htmlFor="username">
-                gekauft von:</label>
+                Gekauft von:</label>
                 <select
                     id="username"
                     name="username"
