@@ -39,7 +39,7 @@ const AusgabeSum = ({ valuesDuplicated }) => {
         let tableObject = []
         for (let ausg in valuesAusgaben){
             const handleEdit = () => navigate(`/dash/ausgaben/${valuesAusgaben[ausg].id}`)
-            const boughtDateAusg = new Date(valuesAusgaben[ausg].boughtDate).toLocaleString('DE', { day: 'numeric', month: 'long' })
+            const boughtDateAusg = new Date(new Date(valuesAusgaben[ausg].boughtDate).toISOString().split('T')[0].replace(/-/g, '\/')).toLocaleString('DE', { day: 'numeric', month: 'long' })//const boughtDateAusg = new Date(new Date(ausgabe.boughtDate).toISOString().split('T')[0].replace(/-/g, '\/')).toLocaleString('DE', { day: 'numeric', month: 'long' })
             const value = (valuesAusgaben[ausg].valueAusgaben).toFixed(2)
 
             tableObject.push(
